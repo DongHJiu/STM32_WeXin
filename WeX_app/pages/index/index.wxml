@@ -1,0 +1,88 @@
+<!--index.wxml-->
+<view class="page-container">
+<!-- 头部部分 -->
+  <view class="header">
+    <view class="header-air">
+      <view>
+        空气质量 - 良
+      </view>
+      <view>
+        广东 - 惠州市
+      </view>
+    </view>
+    <view class="header-title">
+      <view>
+        60
+      </view>
+      <view>
+        晴
+      </view>
+    </view>
+    <view class="header-ad">
+      今天天气
+    </view>
+  </view>
+  <!-- 数据部分 -->
+  <view class="data-container">
+    <!-- 温度 -->
+    <view class="data-card"> 
+      <image class="data-card_icon" src="/static/Temp.png"/>
+      <view>
+        <view class="data-card_title">
+          温度
+        </view>
+        <view class="data-card_value">
+          {{ Temp }}°C
+        </view>
+      </view>
+    </view> 
+    <!-- 湿度 -->
+    <view class="data-card"> 
+      <image class="data-card_icon" src="/static/Hum.png"/>
+      <view>
+        <view class="data-card_title">
+          湿度
+        </view>
+        <view class="data-card_value">
+          {{Hum}}%
+        </view>
+      </view>
+    </view> 
+    <!-- 光照度 -->
+    <view class="data-card"> 
+      <image class="data-card_icon" src="/static/Light.png"/>
+      <view>
+        <view class="data-card_title">
+          光照度
+        </view>
+        <view class="data-card_value">
+          {{Light}} LX
+        </view>
+      </view>
+    </view> 
+    <!-- LED灯 -->
+    <view class="data-card"> 
+      <image class="data-card_icon" src="/static/LED.png"/>
+      <view>
+        <view class="data-card_title">
+          LED
+        </view>
+        <view class="data-card_value">
+          <switch checked="{{LED}}" bindchange="onLedChange" color="#3d7ef9" />
+        </view>
+      </view>
+    </view> 
+    <!-- 报警器 -->
+    <view class="data-card"> 
+      <image class="data-card_icon" src="/static/Alarm.png"/>
+      <view>
+        <view class="data-card_title">
+          报警器
+        </view>
+        <view class="data-card_value">
+          <switch checked="{{Beep}}" bindchange="onBeepChange" color="#3d7ef9" />
+        </view>
+      </view>
+    </view> 
+  </view>
+</view>

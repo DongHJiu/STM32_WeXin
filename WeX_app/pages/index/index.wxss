@@ -1,0 +1,59 @@
+/**index.wxss**/
+.page-container{
+  padding: 36rpx;
+}
+
+.header{
+  background-color: #3d7ef9;
+  color: #fff;
+  border-radius: 36rpx;
+  padding: 36rpx 64rpx;
+}
+
+.header .header-air{
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+
+.header .header-title{
+  display: flex;
+  justify-content: space-between;
+  font-size: 64rpx;
+}
+.header .header-ad{
+  margin-top: 36rpx;
+  font-size: 24rpx;
+}
+
+
+.data-container{
+  /* background-color: aqua; */
+  margin-top: 36rpx;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill,300rpx);
+  grid-gap: 36rpx;
+}
+.data-container .data-card{
+  background-color: azure;
+  height: 160rpx;
+  box-shadow: #d6d6d6 0 0 8rpx;
+  border-radius: 36rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16rpx;
+}
+.data-container .data-card .data-card_icon{
+  height: 72rpx;
+  width: 72rpx;
+}
+.data-container .data-card .data-card_title{
+  font-size: 28rpx;
+  color: #7f7f7f;
+}
+.data-container .data-card .data-card_value{
+  font-size: 52rpx;
+  font-weight: bold;
+  color: #7f7f7f;
+}
