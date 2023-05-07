@@ -4,16 +4,29 @@
 */
 /*
 GY-302的ADDR位接低电平
+
 	PA4  = GY-302模块的SCL引脚
 	PA5  = GY-302模块的SDA引脚
 	PA6  = DHT-11模块的DATA引脚
 	PA7  = OLED屏模块的SCL引脚
 	PA8  = OLED屏模块的SDA引脚
 	PA0  = LED0引脚
+	PC13 = AT24C02模块的SCL引脚
+	PC14 = AT24C02模块的SDA引脚
+	
 USART2:		PA2  = ESP-01S模块的RXT引脚
 					PA3  = ESP-01S模块的TXD引脚
 USART1: 	PA9  = 串口RXT
 					PA10 = 串口TXD
+					
+矩阵按键:	PB0  = H1
+					PB1  = H2
+					PB5  = H3
+					PB6  = H4
+					PB7  = L1
+					PB8  = L2
+					PB9  = L3
+					PB10 = L4
 */
 
 

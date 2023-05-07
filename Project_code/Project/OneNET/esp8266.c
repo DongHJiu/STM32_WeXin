@@ -225,13 +225,13 @@ void ESP8266_Init(void)
 
 	//ESP8266复位引脚
 	GPIO_Initure.GPIO_Mode = GPIO_Mode_Out_PP;
-	GPIO_Initure.GPIO_Pin = GPIO_Pin_14;					//GPIOC14-复位
+	GPIO_Initure.GPIO_Pin = GPIO_Pin_15;					//GPIOC14-复位
 	GPIO_Initure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOC, &GPIO_Initure);
 	
-	GPIO_WriteBit(GPIOC, GPIO_Pin_14, Bit_RESET);
+	GPIO_WriteBit(GPIOC, GPIO_Pin_15, Bit_RESET);
 	Delay_ms(250);
-	GPIO_WriteBit(GPIOC, GPIO_Pin_14, Bit_SET);
+	GPIO_WriteBit(GPIOC, GPIO_Pin_15, Bit_SET);
 	Delay_ms(500);
 	
 	ESP8266_Clear();
