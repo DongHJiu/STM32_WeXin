@@ -7,8 +7,8 @@ const { connect } = require('../../utils/mqtt')
 const mqttHost = 'broker-cn.emqx.io'  //mqtt服务器域名
 const mqttPort = '8084'   //mqtt服务器端口
 
-const deviceSubTopic = '/mysmarthome/subs'  //设备订阅Topic (小程序发布命令的Topic)
-const devicePubTopic = '/mysmarthome/pubs'  //设备发布Topic (小程序订阅数据的Topic)
+const deviceSubTopic = '/mysmarthome/subsz'  //设备订阅Topic (小程序发布命令的Topic)
+const devicePubTopic = '/mysmarthome/pubsz'  //设备发布Topic (小程序订阅数据的Topic)
 
 const mpSubTopic = devicePubTopic
 const mpPubTopic = deviceSubTopic
@@ -29,11 +29,11 @@ Page({
     //console.log(event,detail);
     console.log(event.detail.value);
     const sw = event.detail.value
-    that.setData({Led:sw})
+    that.setData({led:sw})
 
     if(sw){
       that.data.client.publish(mpPubTopic,JSON.stringify({
-        target:"Led",
+        target:"led",
         value:1
       }),function(err){
         if(!err){
@@ -42,7 +42,7 @@ Page({
       })
     }else{
       that.data.client.publish(mpPubTopic,JSON.stringify({
-        target:"Led",
+        target:"led",
         value:0
       }),function(err){
         if(!err){
@@ -54,36 +54,37 @@ Page({
   },
 
   //Beep发送函数
-  onBeepChange(event){
-    const that = this
-    //console.log(event,detail);
-    console.log(event.detail.value);
-    const sw = event.detail.value
-    that.setData({Led:sw})
+  // onBeepChange(event){
+  //   const that = this
+  //   //console.log(event,detail);
+  //   console.log(event.detail.value);
+  //   const sw = event.detail.value
+  //   that.setData({Beep:sw})
 
-    if(sw){
-      that.data.client.publish(mpPubTopic,JSON.stringify({
-        target:"Beep",
-        value:1
-      }),function(err){
-        if(!err){
-          console.log('成功下发指令-打开报警器');
-        }
-      })
-    }else{
-      that.data.client.publish(mpPubTopic,JSON.stringify({
-        target:"Beep",
-        value:0
-      }),function(err){
-        if(!err){
-          console.log('成功下发指令-关闭报警器');
-        }
-      })
-    }
+  //   if(sw){
+  //     that.data.client.publish(mpPubTopic,JSON.stringify({
+  //       target:"Beep",
+  //       value:1
+  //     }),function(err){
+  //       if(!err){
+  //         console.log('成功下发指令-打开报警器');
+  //       }
+  //     })
+  //   }else{
+  //     that.data.client.publish(mpPubTopic,JSON.stringify({
+  //       target:"Beep",
+  //       value:0
+  //     }),function(err){
+  //       if(!err){
+  //         console.log('成功下发指令-关闭报警器');
+  //       }
+  //     })
+  //   }
 
-  },
+  // },
 
   // 事件处理函数
+  
   onLoad() {
     const that = this
     that.setData({

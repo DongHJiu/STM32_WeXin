@@ -10,7 +10,7 @@ GY-302的ADDR位接低电平
 	PA6  = DHT-11模块的DATA引脚
 	PA7  = OLED屏模块的SCL引脚
 	PA8  = OLED屏模块的SDA引脚
-	PA0  = LED0引脚
+	PA0  = LED0引脚(微信小程序控制)
 	PC13 = AT24C02模块的SCL引脚
 	PC14 = AT24C02模块的SDA引脚
 	
@@ -33,8 +33,8 @@ USART1: 	PA9  = 串口RXT
 #include "main.h"
 
  
-const char *topics[] = {"/mysmarthome/subs"};
-const char topics_1[] = {"/mysmarthome/pubs"};
+const char *topics[] = {"/mysmarthome/subsz"};
+const char topics_1[] = {"/mysmarthome/pubsz"};
 
 	char PUB_BUF[256];   //上传数据的buf
 
@@ -46,6 +46,7 @@ int main(void)
 {
 	unsigned short timeCount = 0; //发送间隔变量
 	unsigned char *dataPtr = NULL;
+	unsigned int LED_num;
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);	
@@ -106,8 +107,9 @@ int main(void)
 			UsartPrintf(USART_DEBUG, "OneNet_Publish\r\n");			
 			//OneNet_Publish("pcTopic", "MQTT Publish Test");   //向消息队列发送信息
 			
-			
-				sprintf(PUB_BUF,"{\"Hum\":%d,\"Temp\":%d,\"Light\":%.1f}",p[0],p[2],Light);
+				if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)){LED_num = 0;}
+				else{LED_num = 1;}
+				sprintf(PUB_BUF,"{\"Hum\":%d,\"Temp\":%d,\"Light\":%.1f,\"LED\":%d}",p[0],p[2],Light,LED_num);
 				OneNet_Publish(topics_1,PUB_BUF);
 			
 			
