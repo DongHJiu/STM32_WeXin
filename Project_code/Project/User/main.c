@@ -46,7 +46,8 @@ int main(void)
 {
 	unsigned short timeCount = 0; //发送间隔变量
 	unsigned char *dataPtr = NULL;
-	unsigned int LED_num;
+	unsigned int LED_num;       //LED状态
+	unsigned int Beep_num;      //Beep状态
 	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);	
@@ -65,9 +66,10 @@ int main(void)
 	while(OneNet_DevLink())  //接入OneNET
 		Delay_ms(500);
 	
-	LED_Data(1);       //LED闪烁提示接入成功
+	LED_Data(0);       //LED闪烁提示接入成功
 	Delay_ms(250);
-	LED_Data(0);
+	LED_Data(1);
+	
 	
 	OneNet_Subscribe(topics,1);  //topics是消息的传输地址
 	
@@ -102,14 +104,18 @@ int main(void)
 			}				
 		}
 		
-		if(++timeCount >= 200)									//5000ms / 25 = 200; 5s上传一次数据
+		if(++timeCount >= 250)									//5000ms / 25 = 200; 5s上传一次数据
 		{
 			UsartPrintf(USART_DEBUG, "OneNet_Publish\r\n");			
 			//OneNet_Publish("pcTopic", "MQTT Publish Test");   //向消息队列发送信息
 			
 				if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)){LED_num = 0;}
 				else{LED_num = 1;}
-				sprintf(PUB_BUF,"{\"Hum\":%d,\"Temp\":%d,\"Light\":%.1f,\"LED\":%d}",p[0],p[2],Light,LED_num);
+			//	if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_1)){Beep_num = 0;}
+			//	else{Beep_num = 1;}
+				
+				//将字符串数据格式化写入PUB_BUF并打印出来
+				sprintf(PUB_BUF,"{\"Hum\":%d,\"Temp\":%d,\"Light\":%.1f,\"LED\":%d}",p[0],p[2],Light,LED_num);  
 				OneNet_Publish(topics_1,PUB_BUF);
 			
 			
@@ -119,7 +125,11 @@ int main(void)
 		
 		dataPtr = ESP8266_GetIPD(3);  //检测是否有下发指令_程序有变动_函数有变动
 		if(dataPtr != NULL)
-			OneNet_RevPro(dataPtr);		
+		{
+			OneNet_RevPro(dataPtr);
+			//LED_Data(1);
+			//点个灯就知道他有没有接收数据
+		}
 		Delay_ms(10);		
 	}
 	

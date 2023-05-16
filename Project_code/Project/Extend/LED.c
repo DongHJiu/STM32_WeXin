@@ -25,3 +25,8 @@ void LED_Data(int i){
 		else{GPIO_WriteBit(GPIOA,GPIO_Pin_0,Bit_SET);}
 }
 
+//void LED_DataBeep(int i){
+//	if(i==0){GPIO_WriteBit(GPIOA,GPIO_Pin_1,Bit_RESET);}
+//		else{GPIO_WriteBit(GPIOA,GPIO_Pin_1,Bit_SET);}
+//}
+

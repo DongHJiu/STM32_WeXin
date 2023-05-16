@@ -224,18 +224,23 @@ void OneNet_RevPro(unsigned char *cmd)
 																	cmdid_topic, topic_len, req_payload, req_len);
 				
 				json = cJSON_Parse(req_payload);   //对数据包req_payload进行JSON格式解析
-				if(!json)UsartPrintf(USART_DEBUG,"Error  mrrpr before:[%]\n",cJSON_GetErrorPtr());   //如果解析错误,则执行
+				if(!json){UsartPrintf(USART_DEBUG,"Error  mrrpr before:[%]\n",cJSON_GetErrorPtr());}   //如果解析错误,则执行
 				else
 				{
 					json_value = cJSON_GetObjectItem(json,"LED_SW");
 					if(json_value->valueint)
 					{
+						if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0))
+						{		
 						LED_Data(0);    //点亮LED
+						}
+						else{LED_Data(1);}
 					}
-					else
-					{
-					  LED_Data(1);     //熄灭LED	
-					}					
+					/* -------------------------------------------- */
+					//else
+					//{
+					//  LED_Data(1);     //熄灭LED	
+					//}					
 				}
 					cJSON_Delete(json);
 					UsartPrintf(USART_DEBUG, "Tips:	Send CmdResp\r\n");
